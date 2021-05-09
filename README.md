@@ -1,2 +1,3 @@
-# Odin-Paladins
-Odin Paladins, a fully featured cheat, this version is kinda pasted from a fortnite cheat, but I won't release the external one nor the full rewrite of it.
+# Paladins Odin V1
+ImGui stuff and DX hook are mostly pasted from TargetFN. The rest is all made by me.
+It has a V2 that isn't pasted and made from scratch, as well as an external version, those will not be shared.

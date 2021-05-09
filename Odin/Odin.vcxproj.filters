@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\renderer">
+      <UniqueIdentifier>{8dcaad26-3808-4ad2-bfa1-68f9364b25a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\minhook">
+      <UniqueIdentifier>{95d77175-8cdd-4d60-b05a-562882f7cb39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\SDK">
+      <UniqueIdentifier>{8b36c391-d0b3-4204-bc5e-1d70f90f27a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\SDK\Helpers">
+      <UniqueIdentifier>{853a036a-59d2-4fc2-89b4-f2d416d3e4df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\imgui.cpp">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\imgui_draw.cpp">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\imgui_impl_dx11.cpp">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\Helpers\TEB.cpp">
+      <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CheatHelper.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawMenu.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamicimports.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="includes.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="lazyimporter.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="MainHooking.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="xorstr.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="xorstr.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\color.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\MinHook.h">
+      <Filter>Fichiers d%27en-tête\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="MainOptions.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Major.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Exploits.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\imconfig.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\imgui.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\imgui_impl_dx11.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\stb_rect_pack.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\stb_textedit.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\stb_truetype.h">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\PL_Core_structs.h">
+      <Filter>Fichiers d%27en-tête\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\PL_Engine_classes.h">
+      <Filter>Fichiers d%27en-tête\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Helpers\OffsetsDefines.h">
+      <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Helpers\ProcessEvent.h">
+      <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Helpers\TEB.h">
+      <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Helpers\ntapi.h">
+      <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="minhook\minhook.lib">
+      <Filter>Fichiers d%27en-tête\minhook</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="minhook\LICENSE.txt">
+      <Filter>Fichiers d%27en-tête\minhook</Filter>
+    </Text>
+    <Text Include="renderer\LICENSE.txt">
+      <Filter>Fichiers d%27en-tête\renderer</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
