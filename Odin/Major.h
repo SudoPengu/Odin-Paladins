@@ -202,22 +202,14 @@ bool MainAddress() {
 	Engine = *(uintptr_t*)(ModuleBase + OFFSET_ENGINE);
 	if (!IsValid((DWORD64)Engine)) return false;
 
-	//printf("Engine: 0x%p\n", Engine);
-
 	Game = (UEngine*)(Engine);
 	if (!IsValid((DWORD64)Game)) return false;
-
-	//printf("Game: 0x%p\n", Game);
 
 	LocalPlayer = Game->GamePlayers.GetByIndex(0);
 	if (!IsValid((DWORD64)LocalPlayer)) return false;
 
-	//printf("LocalPlayer: 0x%p\n", LocalPlayer);
-
 	PlayerController = LocalPlayer->Actor;
 	if (!IsValid((DWORD64)PlayerController)) return false;
-
-	//printf("PlayerController: 0x%p\n", PlayerController);
 
 	ReplicationInfo = PlayerController->PlayerReplicationInfo;
 	if (!IsValid((DWORD64)ReplicationInfo)) return false;
@@ -415,7 +407,7 @@ void doActorsLoop()
 					char PlayerNameBuf[64];
 					if (CurrentPawn->PlayerReplicationInfo->PlayerName.IsValid())
 					{
-						sprintf_s(PlayerNameBuf, "%ws | %.1f%%", PlayerName.c_str(), healthPercentage*100);
+						sprintf_s(PlayerNameBuf, E("%ws | %.1f%%"), PlayerName.c_str(), healthPercentage*100);
 						ImGui::GetOverlayDrawList()->AddText(ImVec2(pos.x - flWidth, smax.y - 20), Colors::LimeCL, PlayerNameBuf);
 					}
 				}

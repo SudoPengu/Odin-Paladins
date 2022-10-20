@@ -16,7 +16,7 @@ void MainTick()
 	char* dt = ctime(&now);
 
 	char TitleBuff[80];
-	sprintf_s(TitleBuff, skCrypt_("Odin 2.1.0 | %s"), dt);
+	sprintf_s(TitleBuff, skCrypt_("Odin 3.0.0a | %s"), dt);
 	ImGui::GetOverlayDrawList()->AddText(ImVec2(5, 5), Colors::WhiteCl, TitleBuff);
 
 	// MainAddress() is called at every MainTick() it's basically getting all the needed offsets for the cheat that are already defined in "CheatHelper.h".

@@ -69,7 +69,7 @@ uintptr_t StealTLS()
     auto ret = NtQueryInformationThread(hThread, 0, &tbi, sizeof(tbi), &outlen);
     if (ret)
     {
-        printf("Failed %X, Need len %X, got len %X\n", ret, outlen, sizeof(tbi));
+        //printf("Failed %X, Need len %X, got len %X\n", ret, outlen, sizeof(tbi));
         return 0;
     }
     return *(uintptr_t*)((uintptr_t)tbi.TebBaseAddress + 0x58);
@@ -81,7 +81,7 @@ uintptr_t GetXorKey(size_t index)
     TEB = StealTLS();
 
     unsigned int tlsidx;
-    tlsidx = *(unsigned int*)((uintptr_t)ModuleBase + 0x4187264);
+    tlsidx = *(unsigned int*)((uintptr_t)ModuleBase + 0x430EB44);
 
-    return *(uintptr_t*)(*(uintptr_t*)(TEB + (__int64)8 * tlsidx) + (__int64)8 * index + 48);
+    return *(uintptr_t*)(*(uintptr_t*)(TEB + tlsidx) + 8i64 * ((unsigned __int8)index & 0x7F) + 48);
 }

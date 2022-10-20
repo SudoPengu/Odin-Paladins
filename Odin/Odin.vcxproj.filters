@@ -25,6 +25,9 @@
     <Filter Include="Fichiers d%27en-tête\SDK\Helpers">
       <UniqueIdentifier>{853a036a-59d2-4fc2-89b4-f2d416d3e4df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\skiphook">
+      <UniqueIdentifier>{84c0d8f9-c0c5-4b21-837c-ad662487afc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -44,6 +47,12 @@
     </ClCompile>
     <ClCompile Include="SDK\Helpers\TEB.cpp">
       <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="skiphook\hde32.c">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
+    </ClCompile>
+    <ClCompile Include="skiphook\hde64.c">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +142,21 @@
     </ClInclude>
     <ClInclude Include="SDK\Helpers\ntapi.h">
       <Filter>Fichiers d%27en-tête\SDK\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="skiphook\hde32.h">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
+    </ClInclude>
+    <ClInclude Include="skiphook\hde64.h">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
+    </ClInclude>
+    <ClInclude Include="skiphook\skiphook.h">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
+    </ClInclude>
+    <ClInclude Include="skiphook\table32.h">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
+    </ClInclude>
+    <ClInclude Include="skiphook\table64.h">
+      <Filter>Fichiers d%27en-tête\skiphook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -74,7 +74,7 @@ void DrawMenu()
 		style->ScrollbarSize = 13.0f;
 		style->WindowRounding = 4.0f;
 
-		std::string title = E("Odin Private | Xiloe#7399");
+		std::string title = E("Operator (Odin V3) | Made by Xiloe (Wooteck)");
 		ImGuiWindowFlags TargetFlags;
 		TargetFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
 
@@ -169,7 +169,7 @@ _declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncInt
 				D3D11_TEXTURE2D_DESC backBufferDesc = { 0 };
 				backBuffer->GetDesc(&backBufferDesc);
 
-				hWnd = FindWindow((L"LaunchUnrealUWindowsClient"), (L"Paladins (64-bit, DX11)"));
+				hWnd = FindWindow((E(L"LaunchUnrealUWindowsClient")), (E(L"Paladins (64-bit, DX11)")));
 				if (!width) {
 					oWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(WndProcHook)));
 				}
@@ -231,7 +231,7 @@ bool Renderintial()
 	sd.Windowed = TRUE;
 
 	if (FAILED(D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, 0, &featureLevel, 1, D3D11_SDK_VERSION, &sd, &swapChain, &device, nullptr, &context))) {
-		MessageBox(0, L"Failed to create D3D11 device and swap chain", L"Failure", MB_ICONERROR);
+		MessageBox(0, E(L"Failed to create D3D11 device and swap chain"), E(L"Failure"), MB_ICONERROR);
 		return FALSE;
 	}
 
@@ -245,7 +245,7 @@ bool Renderintial()
 
 	MH_CreateHook(present, PresentHook, reinterpret_cast<PVOID*>(&PresentOriginal));
 	MH_EnableHook(present);
-
+	
 	MH_CreateHook(resize, ResizeHook, reinterpret_cast<PVOID*>(&ResizeOriginal));
 	MH_EnableHook(resize);
 
