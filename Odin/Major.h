@@ -6,14 +6,12 @@
 
 #include "Globals.h"
 
-// Constants that we need for maths stuff
 #define Const_URotation180        32768
 #define Const_PI                  3.14159265358979323
 #define Const_RadToUnrRot         10430.3783504704527
 #define Const_UnrRotToRad         0.00009587379924285
 #define Const_URotationToRadians  Const_PI / Const_URotation180 
 
-// The maths stuff, pretty straight forward.
 namespace maths
 {
 	FRotator VectorToRotation(FVector vVector)
@@ -159,7 +157,7 @@ namespace maths
 	}
 }
 
-// W2S (WorldToScreen) is used to map the 3D game's world coordinates to 2D screen space coordinates.
+// can be better but I'll let you do it :)
 bool W2S(FVector target, ImVec2& dst, FRotator myRot, FVector myLoc, float fov)
 {
 	FVector AxisX, AxisY, AxisZ, Delta, Transformed;
@@ -195,7 +193,6 @@ APawn* LockedPawn = nullptr;
 FVector LockedHead = FVector{ 0, 0, 0 };
 bool Locked = false;
 
-// MainAddress(). Here we gather all the needed addresses. See dllmain.cpp for more infos
 bool saved = false;
 float savedFOV = 0.0f;
 bool MainAddress() {
@@ -214,35 +211,23 @@ bool MainAddress() {
 	ReplicationInfo = PlayerController->PlayerReplicationInfo;
 	if (!IsValid((DWORD64)ReplicationInfo)) return false;
 
-	//printf("ReplicationInfo: 0x%p\n", ReplicationInfo);
-
 	AcknowledgedPawn = PlayerController->AcknowledgedPawn;
 	if (!IsValid((DWORD64)AcknowledgedPawn)) return false;
-
-	//printf("AcknowledgedPawn: 0x%p\n", AcknowledgedPawn);
 
 	PlayerCamera = PlayerController->PlayerCamera;
 	if (!IsValid((DWORD64)PlayerCamera)) return false;
 
-	//printf("PlayerCamera: 0x%p\n", PlayerCamera);
-
 	WorldInfo = PlayerController->WorldInfo;
 	if (!IsValid((DWORD64)WorldInfo)) return false;
 
-	//printf("WorldInfo: 0x%p\n", WorldInfo);
-
 	Weapon = AcknowledgedPawn->Weapon;
 	if (!IsValid((DWORD64)Weapon)) return false;
-
-	//printf("Weapon: 0x%p\n", Weapon);
 
 	// Real FOV = DefaultFOV * FOVMultiplier
 	FOV = PlayerController->PlayerCamera->DefaultFOV * PlayerController->LODDistanceFactor;
 
 	if (!FOV || FOV == 0)
 		return false;
-
-	//printf("FOV: %f\n", FOV);
 
 	if (!saved)
 	{
@@ -297,33 +282,9 @@ void doAimbot()
 			{
 				if (!Settings.AimbotSmoothing)
 				{
-					//newVector = { 0, 0, 0 };
 					maths::AimAtVector(LockedHead, PlayerCamera->RealLocation, AimRotation);
 					PlayerController->Rotation = AimRotation;
 				}
-			/*	else
-				{
-					FVector originalVector = maths::GetAngleTo(LockedHead, PlayerCamera->RealLocation);
-					FVector tempVector;
-
-					if (newVector.X > originalVector.X && newVector.Y > originalVector.Y && newVector.Z > originalVector.Z)
-						newVector = originalVector;
-
-					if (newVector.X != originalVector.X && newVector.Y != originalVector.Y && newVector.Z != originalVector.Z)
-					{
-						if (newVector.X == 0 && newVector.Y == 0 && newVector.Z == 0)
-							tempVector = originalVector;
-						else
-							tempVector = newVector;
-
-						maths::Normalize(tempVector);
-						tempVector = maths::VectorScale(tempVector, Settings.AimbotSmooth);
-						newVector = maths::GetAngleTo(tempVector, PlayerCamera->RealLocation);
-					}
-
-					maths::AimAtVector(newVector, PlayerCamera->RealLocation, AimRotation);
-					PlayerController->Rotation = AimRotation;
-				}*/
 			}
 		}
 	}
@@ -335,10 +296,8 @@ void doAimbot()
 	}
 }
 
-// Actor loop. Here we loop through all the game pawns and check them.
 void doActorsLoop()
 {
-	// ESP. Simple visual ESP features.
 	if (Settings.ESP.Players)
 	{
 		if (!IsValid((DWORD64)WorldInfo)) return;
@@ -434,8 +393,6 @@ void doActorsLoop()
 		}
 	}
 
-	// Aimbot. For the aimbot we do basic pawn checks, then we check if the pawn's W2S is in our FOV circle, then if it is, it becames the ClosestPawn.
-	// The ClosestPawn can then be aimed at.
 	if (Settings.Aimbot && GetAimKey())
 	{
 		if (!IsValid((DWORD64)WorldInfo)) return;

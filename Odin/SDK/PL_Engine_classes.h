@@ -127,7 +127,6 @@ public:
 	FName Name;
 	UObject* Class;
 	UObject* ObjectArcheType;
-
 };
 
 #pragma pack(4)
