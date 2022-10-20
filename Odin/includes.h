@@ -33,8 +33,6 @@
 #include <MinHook.h>
 #pragma comment(lib, "minhook.lib")
 
-#include "skiphook/skiphook.h"
-
 #include "detours/detours.h"
 #include "lazyimporter.h"
 #include "MainOptions.h"
