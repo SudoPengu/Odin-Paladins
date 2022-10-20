@@ -6,8 +6,6 @@
 #include <string>
 #include <locale>
 
-#include "Helpers/ProcessEvent.h"
-
 #include "PL_Core_structs.h"
 
 template<class T>
@@ -58,55 +56,6 @@ private:
 	int32_t Max;
 };
 
-template<class T>
-struct TAntiCheatArray
-{
-	friend struct FString;
-private:
-	uintptr_t Decrypt(size_t i) {
-		return reinterpret_cast<uintptr_t>(Data[i]);
-	}
-
-	T GetData(size_t i) {
-		return reinterpret_cast<T>(Decrypt(i));
-	}
-public:
-	TAntiCheatArray()
-	{
-		Data = nullptr;
-		Count = Unk00 = 0;
-	};
-
-	size_t Num() const
-	{
-		return Count;
-	};
-
-	T operator[](size_t i)
-	{
-		return GetData(i);
-	};
-
-	T GetByIndex(size_t i)
-	{
-		return GetData(i);
-	}
-
-	bool IsValidIndex(size_t i)
-	{
-		uintptr_t addr = Decrypt(i);
-		if (addr == NULL || IsBadReadPtr((void*)addr, 1))
-			return false;
-		return i < Num();
-	}
-
-private:
-	T* Data;
-	__int32 Unk00;
-	__int32 Count;
-};
-
-
 struct FPointer
 {
 	uintptr_t Dummy;
@@ -116,38 +65,6 @@ struct FQWord
 {
 	int A;
 	int B;
-};
-
-class FNameEntry
-{
-	static const auto NAME_WIDE_MASK = 0x1;
-	static const auto NAME_INDEX_SHIFT = 1;
-
-public:
-	uint64_t Flags; //0x0000
-	uint32_t Index; //0x0008
-	char pad_000C[8]; //0x000C
-	char Text[1024];
-
-	int32_t GetIndex() const
-	{
-		return Index >> NAME_INDEX_SHIFT;
-	}
-
-	bool IsWide() const
-	{
-		return Index & NAME_WIDE_MASK;
-	}
-
-	const char* GetAnsiName() const
-	{
-		return Text;
-	}
-
-	std::string GetName() const
-	{
-		return Text;
-	}
 };
 
 struct FName
@@ -199,246 +116,18 @@ struct FString : private TArray<wchar_t>
 	}
 };
 
-class UObject;
-
-class FScriptInterface
-{
-private:
-	UObject* ObjectPointer;
-	void* InterfacePointer;
-
-public:
-	UObject* GetObject() const
-	{
-		return ObjectPointer;
-	}
-
-	UObject*& GetObjectRef()
-	{
-		return ObjectPointer;
-	}
-
-	void* GetInterface() const
-	{
-		return ObjectPointer != nullptr ? InterfacePointer : nullptr;
-	}
-};
-
-template<class InterfaceType>
-class TScriptInterface : public FScriptInterface
+class UObject
 {
 public:
-	InterfaceType* operator->() const
-	{
-		return (InterfaceType*)GetInterface();
-	}
+	FPointer VfTableObject;
+	char pad_0008[0x30];
+	int32_t InternalIndex;
+	char pad_003C[0x04];
+	UObject* Outer;
+	FName Name;
+	UObject* Class;
+	UObject* ObjectArcheType;
 
-	InterfaceType& operator*() const
-	{
-		return *((InterfaceType*)GetInterface());
-	}
-
-	operator bool() const
-	{
-		return GetInterface() != nullptr;
-	}
-};
-
-struct FScriptDelegate
-{
-	unsigned char UnknownData[0x0C];
-};
-
-class UClass;
-class UFunction;
-
-class UObject //Size: 0x0060
-{
-public:
-	FPointer VfTableObject; // 0x0000
-	char pad_0008[0x30]; // 0x0008
-	int32_t InternalIndex; //0x0038
-	char pad_003C[0x04]; //0x003C
-	UObject* Outer; //0x0040
-	FName Name; // 0x0048 struct padding might be wrong here | nope :p
-	UObject* Class; //0x0050
-	UObject* ObjectArcheType; //0x0058
-
-}; // size=0x60
-
-class   UField : public UObject
-{
-public:
-	UField* Next; // 0x0060
-}; // size=0x08
-
-class UEnum : public UField
-{
-public:
-	TArray<FName>   Names;
-};
-
-class UConst : public UField
-{
-public:
-	FString         Value;
-};
-
-class UStruct : public UField //Size: 0x0070 example:  Class Core.Struct // new size: 0x78
-{
-public:
-	char pad_0000[0x10]; //0x0068
-	UField* SuperField; //0x0078
-	UField* Children; //0x0080
-	uint32_t PropertySize; //0x0088
-	char pad_0024[0x47]; //0x008C
-}; // size=0xD0
-
-class UScriptStruct : public UStruct // example: Class Core.ScriptStruct    
-{
-public:
-	char            UnknownData00[0x24]; // this is probably wrong | nope :p
-};
-
-class UFunction : public UStruct
-{
-public:
-	uint32_t FunctionFlags; //0x00D0
-	uint16_t iNative; //0x00D4
-	uint16_t RepOffset; //0x00D6
-	int32_t FName_Index; //0x00D8
-	int32_t FName_unknown_data; //0x00DC
-	uint16_t NumParams; //0x00E0
-	uint16_t ParamSize; //0x00E2
-	uint16_t ReturnValueOffset; //0x00E4
-	char pad_00E6[0x0A]; //0x00E6
-	void* Func; //0x00F0
-};
-
-class UState : public UStruct
-{
-public:
-	char pad_0000[0x5C]; // This might be wrong - need to be checked
-}; //Size: 0x005C
-
-class UClass : public UStruct
-{
-public:
-
-	char pad_0000[0x90]; //0x0000
-	UObject* ClassDefaultObject; // this is right
-	char UnknownData01[0x9C]; // Not sure about this one - need to be checked
-
-	/*
-	char            UnknownData00[0x88];
-	UObject*        ClassDefaultObject;
-	char            UnknownData01[0x70];
-	*/
-	//char[129];
-}; //Size: 0x0204
-
-class UProperty : public UField // Not sure about this one too, might be wrong size
-{
-public:
-
-	int32_t ArrayDim; //0x0000
-	int32_t ElementSize; //0x0004
-	FQWord PropertyFlags;
-	int32_t Unk; //0x0010
-	int32_t Offset; //0x0014
-	UProperty* Next;
-	int64_t PropertySize;
-	char pad_0018[0x08]; //0x0018
-}; //Size: 0x0040
-
-class UByteProperty : public UProperty
-{
-public:
-	UEnum* Enum;
-};
-
-class UIntProperty : public UProperty
-{
-public:
-
-};
-
-class UFloatProperty : public UProperty
-{
-public:
-
-};
-
-class UDoubleProperty : public UProperty
-{
-public:
-
-};
-
-class UBoolProperty : public UProperty
-{
-public:
-	unsigned long   BitMask;
-};
-
-class UObjectProperty : public UProperty
-{
-public:
-	UClass* PropertyClass;
-};
-
-class UComponentProperty : public UObjectProperty
-{
-public:
-};
-
-class UClassProperty : public UObjectProperty
-{
-public:
-	UClass* MetaClass;
-};
-
-class UInterfaceProperty : public UProperty
-{
-public:
-	UClass* InterfaceClass;
-};
-
-class UNameProperty : public UProperty
-{
-public:
-	void* unk;
-};
-
-class UStructProperty : public UProperty
-{
-public:
-	UStruct* Struct;
-};
-
-class UStrProperty : public UProperty
-{
-public:
-
-};
-
-class UArrayProperty : public UProperty
-{
-public:
-	UProperty* Inner;
-};
-
-class UMapProperty : public UProperty
-{
-public:
-	UProperty* KeyProp;
-	UProperty* ValueProp;
-};
-
-class UDelegateProperty : public UProperty
-{
-public:
-	UFunction* SignatureFunction;
 };
 
 #pragma pack(4)

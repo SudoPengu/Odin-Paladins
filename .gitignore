@@ -348,3 +348,11 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+Bypass/
+x64/
+test.dll
+modmap.exe
+kdmapper.exe
+driver.sys
+AutoPad/

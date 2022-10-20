@@ -23,9 +23,6 @@
     <ClCompile Include="renderer\imgui.cpp" />
     <ClCompile Include="renderer\imgui_draw.cpp" />
     <ClCompile Include="renderer\imgui_impl_dx11.cpp" />
-    <ClCompile Include="SDK\Helpers\TEB.cpp" />
-    <ClCompile Include="skiphook\hde32.c" />
-    <ClCompile Include="skiphook\hde64.c" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -48,17 +45,9 @@
     <ClInclude Include="renderer\stb_rect_pack.h" />
     <ClInclude Include="renderer\stb_textedit.h" />
     <ClInclude Include="renderer\stb_truetype.h" />
-    <ClInclude Include="SDK\Helpers\ntapi.h" />
-    <ClInclude Include="SDK\Helpers\ProcessEvent.h" />
     <ClInclude Include="SDK\Helpers\OffsetsDefines.h" />
-    <ClInclude Include="SDK\Helpers\TEB.h" />
     <ClInclude Include="SDK\PL_Core_structs.h" />
     <ClInclude Include="SDK\PL_Engine_classes.h" />
-    <ClInclude Include="skiphook\hde32.h" />
-    <ClInclude Include="skiphook\hde64.h" />
-    <ClInclude Include="skiphook\skiphook.h" />
-    <ClInclude Include="skiphook\table32.h" />
-    <ClInclude Include="skiphook\table64.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="xorstr.h" />
@@ -134,7 +123,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>test</TargetName>
+    <TargetName>Odin</TargetName>
     <IncludePath>./minhook;./renderer;./skiphook;$(IncludePath)</IncludePath>
     <LibraryPath>./minhook;./renderer;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -210,7 +199,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
