@@ -74,7 +74,7 @@ void DrawMenu()
 		style->ScrollbarSize = 13.0f;
 		style->WindowRounding = 4.0f;
 
-		std::string title = E("Odin Github | Made by Xiloe (Wooteck)");
+		std::string title = E("Modified by | AdmiralDaiy");
 		ImGuiWindowFlags TargetFlags;
 		TargetFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
 
